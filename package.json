@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "nodemon": "nodemon server.js"
   },
   "author": "Joseph Shanahan",
   "license": "ISC",
@@ -23,5 +24,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
   }
 }

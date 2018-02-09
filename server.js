@@ -1,8 +1,9 @@
 const express = require('express');
+const path = require('path')
 const app = express();
 const port = process.env.PORT || 8080;
 const mongoose = require('mongoose');
-const password = require('passport')
+const passport = require('passport')
 const flash = require('connect-flash');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -32,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 app.use(flash()); // use connect flash for flash messages stored in session
 // routes
-require('./routes');
+require('./app/routes')(app,passport);
 
 app.listen(port,() => {
   console.log(`The magic happens on ${port}`);

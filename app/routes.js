@@ -3,10 +3,8 @@ module.exports = function (app, passport){
     res.render('index.ejs');
   });
   //login
-  app.get('/login',() => {
-    res.render('login.ejs', (req,res) => {
+  app.get('/login',(req, res) => {
       res.render('login.ejs',{message: req.flash('loginMessage')});
-    });
   });
   // signup
   app.get('/signup', (req, res) => {
