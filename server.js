@@ -15,7 +15,7 @@ mongoose.Promise = global.Promise;
 // configuration section
 mongoose.connect(configDB.url, (err, db) => {
   if (err) {
-      return console.log('Unable to connect to the MongoDB server');
+    return console.log('Unable to connect to the MongoDB server');
   }
   console.log('Connected to MongoDB server');
 });
@@ -30,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); // setup the ejs for templating
 
 // Config password model
-app.use(session({secret: 'tbWDUe53uBegqRGD2SD3dae1Z8aoKq3k'}));
+app.use(session({secret: 'tbWDUe53uBegqRGD2SD3dae1Z8aoKq3k', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect flash for flash messages stored in session
@@ -40,4 +40,3 @@ require('./app/routes')(app, passport);
 app.listen(port, () => {
   console.log(`The magic happens on ${port}`);
 });
-
