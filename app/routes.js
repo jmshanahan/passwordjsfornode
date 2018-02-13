@@ -36,7 +36,17 @@ module.exports = function (app, passport){
   app.get('/logout', (req,res) => {
     req.logout();
     res.redirect('/');
-  })
+  });
+
+  //Twitter routes
+  //route for twitter authentication and login
+  app.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+  app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+    successRedirect: '/profile',
+    failureRedirect:'/'
+  }));
 };
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next){

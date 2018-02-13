@@ -17,10 +17,18 @@
   <div class="col-sm-6">
   <div class="well">
     <h3<spam class="fa fa-user"></spam>Local</h3>
+      <!--
       <p>
         <strong>id</strong>: <%= user._id %><br>
         <strong>email</strong>: <%= user.local.email %><br>
         <strong>password</strong></strong>: <%= user.local.password %><br>
+      </p>
+      -->
+         <p>
+        <strong>id</strong>: <%= user.twitter.id %><br>
+        <strong>token</strong>: <%= user.twitter.token %><br>
+        <strong>username</strong></strong>: <%= user.twitter.username %><br>
+        <strong>displayName</strong></strong>: <%= user.twitter.username %><br>
       </p>
   </div>
   </div>

@@ -1,5 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require("../app/models/user");
+const configAuth = require("./auth");
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -67,4 +69,38 @@ module.exports = function(passport) {
         }
       );
   }));
+
+  // Twitter
+  passport.use(new TwitterStrategy({
+    consumerKey : configAuth.twitterAuth.consumerKey,
+    consumerSecret: configAuth.twitterAuth.consumerSecret,
+    callbackURL: configAuth.twitterAuth.callbackURL
+  }, function(token, tokenSecret,profile, done){
+    //make this code asynchromous
+    // User.findOne won't fire until we have all our data back from Twitter
+    process.nextTick(function(){
+      User.findOne({'twitter.id': profile.id}, function(err,user){
+          if(err)
+            return done(err);
+          if(user){
+            return done(null, user);
+          }else {
+            var newUser = new User();
+            newUser.twitter.id = profile.id;
+            newUser.twitter.token = token;
+            newUser.twitter.username = profile.username;
+            newUser.twitter.displayName = profile.displayName;
+            newUser.save(function(err){
+              if (err)
+                throw err;
+              return done(null, newUser);
+            });
+
+
+          }
+      });
+    });
+    }));
+    
+
 };
