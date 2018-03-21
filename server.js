@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path')
 const app = express();
@@ -39,4 +40,7 @@ require('./app/routes')(app, passport);
 
 app.listen(port, () => {
   console.log(`The magic happens on ${port}`);
+  console.log(process.env.DBUSER);
+  console.log(process.env.DBPASSWORD);
+
 });
